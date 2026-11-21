@@ -1,0 +1,207 @@
+/* Same-to-same recreation: all positions are in "scene" pixels and scaled to the screen by script.js */
+:root{color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#fff;color:#111;overflow:hidden;overscroll-behavior:none;touch-action:manipulation;-webkit-text-size-adjust:100%}
+img,svg{display:block}
+img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
+button{font:inherit;color:inherit}
+.screen{position:fixed;inset:0;display:none;opacity:0;transition:opacity .45s ease;background:#fff;overflow:hidden}
+.screen.active{opacity:1}
+.scene{position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center}
+.scene>*{position:absolute}
+.scene>img{max-width:none}
+
+.head{font-family:'Gilda Display','Playfair Display',Georgia,'Times New Roman',serif;font-size:23px;line-height:1.15;margin:0;text-align:center;color:#111;letter-spacing:.2px;user-select:none;-webkit-user-select:none}
+.script{font-family:'Dancing Script','Brush Script MT','Segoe Script',cursive;font-weight:500;font-size:32px;line-height:50px;margin:0;text-align:center;color:#111}
+.sc{font-family:'Over the Rainbow','Dancing Script','Segoe Script',cursive;font-size:27px;line-height:1.25;margin:0;color:#111}
+.fin{font-family:'Oooh Baby','Dancing Script','Segoe Script',cursive;font-size:66px;line-height:1.1;margin:0;text-align:center;color:#111}
+#t3b{font-size:21px}
+#t7{text-align:left;font-size:20px;white-space:nowrap}
+
+.btn{min-width:112px;height:35px;padding:2px 16px 3px;background:#fff;border:1.5px solid #1b1b1b;border-radius:15px;box-shadow:2px 3px 0 #e9a717;cursor:pointer;font-family:'Gilda Display','Playfair Display',Georgia,serif;font-size:19px;line-height:1}
+.btn span{text-decoration:underline;text-underline-offset:2px}
+.btn:active{transform:translateY(1px)}
+.round{background:none;border:0;padding:0;cursor:pointer;border-radius:50%}
+.round img{width:100%;height:100%}
+.round:active{transform:scale(.94)}
+.hit{background:transparent;border:0;padding:0;cursor:pointer;border-radius:12px}
+.hit:focus-visible,.btn:focus-visible,.round:focus-visible{outline:2px solid #ff6fa8;outline-offset:3px}
+
+/* ---- entrance animations (replay every time a screen is shown) ---- */
+@keyframes drop{from{transform:translateY(-130%);opacity:0}to{transform:none;opacity:1}}
+@keyframes rise{from{transform:translateY(120%);opacity:0}to{transform:none;opacity:1}}
+@keyframes pop{0%{transform:scale(.55);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes fromleft{from{transform:translateX(-50px);opacity:0}to{transform:none;opacity:1}}
+@keyframes boxin{from{transform:translateY(42%);opacity:0}to{transform:none;opacity:1}}
+@keyframes bearin{from{transform:translateX(-70%)}to{transform:none}}
+@keyframes poin{from{translate:0 -50px;opacity:0}to{translate:0 0;opacity:1}}
+@keyframes write{from{clip-path:inset(-10% 100% -10% 0)}to{clip-path:inset(-10% -2% -10% 0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.screen .a-drop,.screen .a-rise,.screen .a-pop,.screen .a-fade,.screen .a-fade2,.screen .a-late,.screen .a-left,.screen .a-box,.screen .a-popw,.screen .a-popp,.screen .a-paper,.screen .a-bear,.screen .a-write,.screen .item,.screen .float,.screen .po{opacity:0}
+.screen.active .a-drop{animation:drop .9s cubic-bezier(.2,.8,.25,1) both}
+.screen.active .a-rise{animation:rise .85s cubic-bezier(.2,.8,.25,1) .15s both}
+.screen.active .a-pop{animation:pop .7s ease .1s both}
+.screen.active .a-fade{animation:fade .7s ease .2s both}
+.screen.active .a-fade2{animation:fade .7s ease .55s both}
+.screen.active .a-late{animation:fade .6s ease 1.1s both}
+.screen.active .a-left{animation:fromleft .8s ease .3s both}
+.screen.active .a-box{animation:boxin .9s cubic-bezier(.2,.8,.25,1) both}
+.screen.active .a-popw{animation:pop .6s ease .7s both}
+.screen.active .a-popp{animation:pop .6s ease .9s both}
+.screen.active .a-paper{animation:fade 1s ease 1s both}
+.screen.active .a-bear{animation:bearin .9s ease .5s both;opacity:1}
+.screen.active .a-write{animation:write 2.4s ease-in-out .8s both;opacity:1}
+.screen.active .item{animation:pop .5s ease both}
+.screen.active .i1{animation-delay:1s}.screen.active .i2{animation-delay:1.15s}.screen.active .i3{animation-delay:1.3s}
+.screen.active .i4{animation-delay:1.45s}.screen.active .i5{animation-delay:1.6s}.screen.active .i6{animation-delay:1.75s}
+.screen.active .float{animation:fade .8s ease .6s both,bob 3.4s ease-in-out 1.4s infinite}
+.screen.active .f2{animation-delay:.8s,1.9s}.screen.active .f3{animation-delay:1s,.6s}
+.screen.active .po{animation:poin .7s ease both}
+.screen.active #po1{animation-delay:.2s}.screen.active #po2{animation-delay:.4s}.screen.active #po3{animation-delay:.6s}.screen.active #po4{animation-delay:.8s}
+.screen.active #cam1{animation-delay:.9s}.screen.active #cam2{animation-delay:1.1s}
+
+/* ---- gift box lid text (gold foil script) ---- */
+#gifttxt{font-family:'Pinyon Script','Great Vibes','Snell Roundhand','Apple Chancery','Brush Script MT',cursive;font-size:28px;line-height:1.18;text-align:center;white-space:nowrap;translate:-50% -50%;pointer-events:none;background:linear-gradient(100deg,#fbeccb 0%,#e8c48d 50%,#f8e4bb 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 .6px 0 rgba(150,95,70,.35))}
+/* ---- letter ---- */
+#paper{overflow:hidden}
+.letter{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4px 11px;font-family:'Gilda Display','Playfair Display',Georgia,serif;font-size:10.2px;line-height:1.34;color:#1b1010}
+.letter p{margin:0}
+.letter p+p{margin-top:1px}
+.pk{font-size:.95em}
+
+/* ---- gallery ---- */
+.string{left:-1200px;top:-200px;width:3120px;height:700px;fill:none;stroke:#636363;stroke-width:3;stroke-linecap:round;pointer-events:none}
+.string.p{display:none}
+.po{background:linear-gradient(#ffcadd,#ff9ccb);outline:1px dashed #7b5a69;outline-offset:-2px;rotate:var(--rot)}
+.win{position:absolute;overflow:hidden}
+.ph{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain}
+.deco{position:absolute;height:auto}
+.scene>.po{position:absolute}
+
+/* ---- final ---- */
+#ftop{position:absolute;left:0;top:0;width:100%;height:auto;z-index:0}
+#s9 .scene{z-index:1}
+#cover{position:fixed;left:0;top:0;width:100%;height:100%;object-fit:cover;z-index:50;transform:translateY(105%);pointer-events:none}
+#cover.in{transition:transform .85s cubic-bezier(.55,0,.25,1);transform:none}
+#cover.out{transition:transform 1.4s cubic-bezier(.55,0,.25,1);transform:translateY(-105%)}
+
+@media (max-aspect-ratio:1/1){
+  .string.l{display:none}.string.p{display:block}
+  .fin{font-size:56px}
+  #ftop{width:170%;left:-35%}
+  .letter{font-size:10.2px}
+}
+@media (prefers-reduced-motion:reduce){
+  .screen *{animation-duration:.01s!important;animation-delay:0s!important}
+  .screen .float{animation:none!important;opacity:1}
+}
+
+/* ---------- layout: landscape ---------- */
+#s1 .scene{--w:520px;--h:330px}
+#e1{left:147px;top:0px;width:225px;height:236px}
+#t1{left:0px;top:250px;width:520px}
+#b1{left:392px;top:288px}
+#s2 .scene{--w:520px;--h:330px}
+#t2{left:0px;top:4px;width:520px}
+#e2{left:146px;top:46px;width:228px;height:214px}
+#b2y{left:14px;top:268px}
+#b2n{left:396px;top:268px}
+#s3 .scene{--w:540px;--h:330px}
+#t3{left:0px;top:4px;width:540px}
+#e3{left:150px;top:42px;width:238px;height:198px}
+#t3b{left:0px;top:262px;width:540px}
+#b3{left:420px;top:262px}
+#s4 .scene{--w:545px;--h:330px}
+#t4{left:0px;top:4px;width:545px}
+#e4{left:152px;top:40px;width:240px;height:238px}
+#b4{left:468px;top:232px;width:72px;height:70px}
+#s5 .scene{--w:590px;--h:396px}
+#t5{left:34px;top:66px;width:160px}
+#wink{left:202px;top:129px;width:110px;height:105px}
+#pair{left:8px;top:236px;width:144px;height:104px}
+#box{left:215px;top:8px;width:360px;height:388px}
+#gifttxt{left:387px;top:121px}
+#it-envelope{left:281px;top:205px;width:75px;height:75px}
+#it-bracelet{left:353px;top:197px;width:67px;height:57px}
+#it-camera{left:427px;top:205px;width:85px;height:61px}
+#it-bow{left:253px;top:269px;width:57px;height:49px}
+#it-bouquet{left:347px;top:249px;width:83px;height:95px}
+#it-scrunchie{left:457px;top:271px;width:81px;height:65px}
+#h-env{left:275px;top:199px;width:87px;height:87px}
+#h-cam{left:421px;top:199px;width:97px;height:73px}
+#h-sf{left:341px;top:243px;width:95px;height:107px}
+#s6 .scene{--w:620px;--h:366px}
+#env{left:145px;top:6px;width:375px;height:360px}
+#paper{left:185px;top:74px;width:282px;height:208px}
+#lel{left:20px;top:56px;width:88px;height:106px}
+#ler{left:522px;top:68px;width:86px;height:72px}
+#lerb{left:514px;top:248px;width:82px;height:72px}
+#bk6{left:6px;top:274px;width:70px;height:70px}
+#s7 .scene{--w:720px;--h:368px}
+#cam1{left:70px;top:28px;width:112px;height:86px}
+#cam2{left:584px;top:30px;width:94px;height:66px}
+#bear{left:14px;top:214px;width:106px;height:138px}
+#t7{left:390px;top:254px;width:200px}
+#bk7{left:362px;top:292px;width:70px;height:70px}
+#po1{left:64.5px;top:172.0914285714286px;width:134px;height:108.41714285714286px;--rot:9.6deg}
+#po2{left:235.0px;top:149.48000000000002px;width:128px;height:105.03999999999999px;--rot:-4.6deg}
+#po3{left:421.96px;top:81.0px;width:83.08px;height:146px;--rot:5.3deg}
+#po4{left:578.5px;top:104.5px;width:88.0px;height:138px;--rot:-6.9deg}
+#s8 .scene{--w:640px;--h:340px}
+#sfbig{left:270px;top:5px;width:328px;height:269px}
+#sf1{left:10px;top:25px;width:90px;height:80px}
+#sf2{left:130px;top:72px;width:82px;height:66px}
+#sf3{left:52px;top:148px;width:60px;height:62px}
+#t8a{left:6px;top:232px;width:460px}
+#t8b{left:6px;top:276px;width:520px}
+#b8{left:563px;top:257px;width:72px;height:70px}
+#s9 .scene{--w:600px;--h:300px}
+#t9{left:0px;top:96px;width:600px}
+#hug{left:378px;top:186px;width:150px;height:112px}
+/* ---------- layout: portrait phones ---------- */
+@media (max-aspect-ratio: 1/1){
+#s5 .scene{--w:380px;--h:560px}
+#t5{left:6px;top:4px;width:190px}
+#pair{left:226px;top:24px;width:144px;height:104px}
+#wink{left:-2px;top:281px;width:110px;height:105px}
+#box{left:10px;top:160px;width:360px;height:388px}
+#gifttxt{left:182px;top:273px}
+#it-envelope{left:76px;top:357px;width:75px;height:75px}
+#it-bracelet{left:148px;top:349px;width:67px;height:57px}
+#it-camera{left:222px;top:357px;width:85px;height:61px}
+#it-bow{left:48px;top:421px;width:57px;height:49px}
+#it-bouquet{left:142px;top:401px;width:83px;height:95px}
+#it-scrunchie{left:252px;top:423px;width:81px;height:65px}
+#h-env{left:70px;top:351px;width:87px;height:87px}
+#h-cam{left:216px;top:351px;width:97px;height:73px}
+#h-sf{left:136px;top:395px;width:95px;height:107px}
+#s6 .scene{--w:380px;--h:560px}
+#env{left:2px;top:96px;width:375px;height:360px}
+#paper{left:42px;top:164px;width:282px;height:208px}
+#lel{left:14px;top:0px;width:88px;height:106px}
+#ler{left:280px;top:14px;width:86px;height:72px}
+#lerb{left:276px;top:476px;width:82px;height:72px}
+#bk6{left:30px;top:486px;width:70px;height:70px}
+#po1{left:20.950000000000003px;top:105.66014285714286px;width:154.1px;height:124.67971428571428px;--rot:9.6deg}
+#po2{left:210.4px;top:89.602px;width:147.2px;height:120.79599999999998px;--rot:-4.6deg}
+#po3{left:56.229000000000006px;top:288.05px;width:95.54199999999999px;height:167.89999999999998px;--rot:5.3deg}
+#po4{left:227.4px;top:286.65px;width:101.19999999999999px;height:158.7px;--rot:-6.9deg}
+#s7 .scene{--w:380px;--h:640px}
+#cam1{left:6px;top:4px;width:90px;height:69px}
+#cam2{left:290px;top:6px;width:75px;height:53px}
+#bear{left:-8px;top:470px;width:95px;height:124px}
+#t7{left:120px;top:552px;width:200px}
+#bk7{left:150px;top:572px;width:70px;height:70px}
+#s8 .scene{--w:360px;--h:610px}
+#sfbig{left:24px;top:120px;width:328px;height:269px}
+#sf1{left:6px;top:6px;width:90px;height:80px}
+#sf2{left:138px;top:24px;width:82px;height:66px}
+#sf3{left:268px;top:10px;width:60px;height:62px}
+#t8a{left:8px;top:400px;width:344px}
+#t8b{left:8px;top:446px;width:344px}
+#b8{left:146px;top:536px;width:72px;height:70px}
+#s9 .scene{--w:500px;--h:300px}
+#t9{left:0px;top:60px;width:500px}
+#hug{left:330px;top:200px;width:150px;height:112px}
+}
